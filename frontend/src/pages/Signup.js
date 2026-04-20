@@ -30,6 +30,9 @@ function Signup() {
         </select>
 
         <button type="submit">Register</button>
+        <p className= "link-text">
+          Already have an account? <a href="/login">Login</a>
+        </p>
       </form>
     </div>
   );

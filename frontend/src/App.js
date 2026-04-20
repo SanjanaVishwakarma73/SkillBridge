@@ -4,6 +4,7 @@ import Jobs from "./pages/Jobs";
 import Workers from "./pages/Workers";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+<Route path="/login" element={<Login />} />
 import EmployeeProfile from "./pages/EmployeeProfile";
 import PostJob from "./pages/PostJob";
 
