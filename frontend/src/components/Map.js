@@ -6,14 +6,20 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 27.4924, // Mathura (you can change later)
+  lat: 27.4924,
   lng: 77.6737,
 };
 
 function Map() {
   return (
-    <LoadScript googleMapsApiKey="AIzaSyADOjBOq8uri9r8R9MVgZ6ho0i312-ycKE">
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
+    <LoadScript
+      googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+    >
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={12}
+      >
         <Marker position={center} />
       </GoogleMap>
     </LoadScript>

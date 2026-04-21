@@ -1,10 +1,15 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import API from "../services/api";
 import "./Login.css";
 
 function Login() {
-  const [form, setForm] = useState({});
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    email: "",
+    password: ""
+  });
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -12,14 +17,15 @@ function Login() {
     try {
       const res = await API.post("/users/login", form);
 
-      alert("Login Successful ✅");
-
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      window.location.href = "/";
+      // ❌ remove alert (optional)
+      // alert("Login Successful ✅");
+
+      navigate("/");
 
     } catch (err) {
-      alert("Invalid Email or Password ❌");
+      alert(err.response?.data?.message || "Invalid Email or Password ❌");
     }
   };
 
@@ -32,6 +38,7 @@ function Login() {
           <input
             type="email"
             placeholder="Enter Email"
+            value={form.email}
             required
             onChange={(e) =>
               setForm({ ...form, email: e.target.value })
@@ -41,6 +48,7 @@ function Login() {
           <input
             type="password"
             placeholder="Enter Password"
+            value={form.password}
             required
             onChange={(e) =>
               setForm({ ...form, password: e.target.value })

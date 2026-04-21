@@ -1,39 +1,60 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import API from "../services/api";
+import "./Signup.css";
 
 function Signup() {
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    location: "",
+    username: "",
+    password: "",
+    role: ""
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await API.post("/users/signup", form);
-    alert("User Registered!");
+    try {
+      await API.post("/users/signup", form);
+      alert("User Registered ✅");
+    } catch (err) {
+      alert("Error registering user ❌");
+    }
   };
 
   return (
-    <div>
-      <h2>Signup</h2>
+    <div className="signup-wrapper">
+      <div className="signup-card">
+        <h2>Sign Up</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input placeholder="Name" onChange={e => setForm({...form, name: e.target.value})} />
-        <input placeholder="Email" onChange={e => setForm({...form, email: e.target.value})} />
-        <input placeholder="Phone" onChange={e => setForm({...form, phone: e.target.value})} />
-        <input placeholder="Location" onChange={e => setForm({...form, location: e.target.value})} />
-        <input placeholder="Username" onChange={e => setForm({...form, username: e.target.value})} />
-        <input type="password" placeholder="Password" onChange={e => setForm({...form, password: e.target.value})} />
+        <form onSubmit={handleSubmit}>
+          <input name="name" placeholder="Name" onChange={handleChange} required />
+          <input name="email" type="email" placeholder="Email" onChange={handleChange} required />
+          <input name="phone" placeholder="Phone" onChange={handleChange} required />
+          <input name="location" placeholder="Location" onChange={handleChange} required />
+          <input name="username" placeholder="Username" onChange={handleChange} required />
+          <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
 
-        <select onChange={e => setForm({...form, role: e.target.value})}>
-          <option>Select Role</option>
-          <option value="employee">Employee</option>
-          <option value="employer">Employer</option>
-        </select>
+          <select name="role" onChange={handleChange} required>
+            <option value="">Select Role</option>
+            <option value="employee">Employee</option>
+            <option value="employer">Employer</option>
+          </select>
 
-        <button type="submit">Register</button>
-        <p className= "link-text">
-          Already have an account? <a href="/login">Login</a>
-        </p>
-      </form>
+          <button type="submit">Register</button>
+
+          <p className="link-text">
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 }

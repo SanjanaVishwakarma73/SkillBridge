@@ -32,7 +32,11 @@ startServer();
 // routes
 const userRoutes = require("./routes/userRoutes");
 const jobRoutes = require("./routes/jobRoutes");
+const workerRoutes = require("./routes/workerRoutes");
+const applicationRoutes = require("./routes/applicationRoutes");
+
 
 app.use("/users", userRoutes);
-app.use("/jobs", jobRoutes);
-
+app.use("/api", jobRoutes);
+app.use("/api", workerRoutes);
+app.use("/api", applicationRoutes);
