@@ -19,7 +19,7 @@ function Home() {
 
   return (
     <div>
-      
+      <Navbar />
 
       <div style={{ textAlign: "center", marginTop: "30px" }}>
         <h1>Find Skilled Workers Near You</h1>
@@ -64,7 +64,7 @@ function Home() {
           ))
         )}
       </div>
-
+        
       {/* MAP */}
       <div style={{ marginTop: "40px", padding: "20px" }}>
         <h2>Nearby Workers Map</h2>
